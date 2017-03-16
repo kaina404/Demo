@@ -9,24 +9,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.io.File;
-import java.io.IOException;
-
-import okhttp3.Cache;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Headers;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import com.aesthetics.lovetally.ok.Demo;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -101,9 +88,11 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            Demo.updateFile();
 //            asyncGet();
-            updateFile();
+//            updateFile();
         } else if (id == R.id.nav_gallery) {
+            Demo.asyncGet(this);
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -120,78 +109,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void updateFile(){
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                OkHttpClient client = new OkHttpClient();
-                final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
-                RequestBody requestBody = new MultipartBody.Builder()
-                        .setType(MultipartBody.FORM)
-                        .addFormDataPart("title", "xu")
-                        .addFormDataPart(
-                                "image",
-                                "ok.png",
-                                RequestBody.create(
-                                        MEDIA_TYPE_PNG,
-                                        new File("/storage/emulated/0/pazq/PALocal/vstock/img/ok.png")))
-                        .build();
-                Request request = new Request.Builder()
-                        .post(requestBody)
-                        .header("Authorization", "Client-ID " + "...")
-                        .url("https://api.imgur.com/3/image")
-                        .build();
-                Call call = client.newCall(request);
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.d("image", "image onFailure");
-                    }
 
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        Log.d("image", response.body().string());
-
-                    }
-                });
-            }
-        }.start();
-    }
-
-    private void asyncGet() {
-
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                try {
-
-                    Headers headers = Headers.of("ContentType", "application/text");
-                    Request request = new Request.Builder().headers(headers).get().url("http://www.baidu.com").build();
-                    Cache cache = new Cache(MainActivity.this.getCacheDir(), 10 * 2014);
-                    OkHttpClient okHttpClient = new OkHttpClient.Builder().cache(cache).build();
-                    Call call = okHttpClient.newCall(request);
-                    call.enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-
-                        }
-
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            Log.d("response", "response===="+response.body().string());
-                        }
-                    });
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-
-
-    }
 
 
 }
