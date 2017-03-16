@@ -76,18 +76,39 @@ public class Demo {
       *生成的boundary（边界）用来分块不同的内容  每一部分的数据均以这个开始，然后是*内容描述* ，然后是回车，最后
       * 是字段的内容（文本或者二进制）。如果传输的是文件，还要标注文件名称和文件类型信息。消息主题最后以boundary结束。
       *
-      *
-      *
-      *
-      *
-      *
-      *
-      *
-      *
-      *
-      *
       */
 
+     //更多Content-Type类型
+
+     /**
+      * image 类型
+      * png jpeg ...
+      */
+
+     /**
+      * text 类型
+      * xml html...
+      */
+
+     /**
+      * audio
+      */
+
+     /**
+      * video
+      */
+
+     /**
+      * java
+      */
+
+     /**
+      * message
+      */
+
+     /**
+      * drawing
+      */
 
      public static void postJson(){
 
