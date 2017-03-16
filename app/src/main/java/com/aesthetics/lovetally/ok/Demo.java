@@ -111,7 +111,23 @@ public class Demo {
       */
 
      public static void postJson(){
+          String METHOD = "POST";
+          MediaType JSON = MediaType.parse("application/json;charset=utf-8");
+          OkHttpClient client = new OkHttpClient();
+          RequestBody requestBody = RequestBody.create(JSON, "{\"title\":\"test\",\"sub\":[1,2,3]}");
+          Request request = new Request.Builder().method(METHOD,requestBody).url("http://www.baidu.com").build();
+          Call call = client.newCall(request);
+          call.enqueue(new Callback() {
+               @Override
+               public void onFailure(Call call, IOException e) {
 
+               }
+
+               @Override
+               public void onResponse(Call call, Response response) throws IOException {
+
+               }
+          });
      }
 
      /**
