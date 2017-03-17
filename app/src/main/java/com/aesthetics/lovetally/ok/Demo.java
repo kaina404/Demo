@@ -5,6 +5,8 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Cache;
 import okhttp3.Call;
@@ -118,7 +120,7 @@ public class Demo {
      /**
       * 请求报文和相应报文只是起始行不一致
       *
-      * 请求报文                                相应报文
+      * 请求报文                                响应报文
       * 起始行  GET www.baidu.com HTTP/1.1      HTTP/1.1 200 OK
       * header Accept:text/*                   Content-Type:application/json
       *
@@ -203,7 +205,9 @@ public class Demo {
                     super.run();
                     try {
 
-                         Headers headers = Headers.of("ContentType", "application/text");
+                         Map<String, String > headMap = new HashMap<String, String>();
+                         headMap.put("Content-Type", "application/text");
+                         Headers headers = Headers.of(headMap);
                          Request request = new Request.Builder().headers(headers).get().url("http://www.baidu.com").build();
                          Cache cache = new Cache(context.getCacheDir(), 10 * 2014);
                          OkHttpClient okHttpClient = new OkHttpClient.Builder().cache(cache).build();
