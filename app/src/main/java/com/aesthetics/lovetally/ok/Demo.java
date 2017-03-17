@@ -73,6 +73,8 @@ public class Demo {
       * ------WebKitFormBoundaryrGKCBY7qhFd3TrwA--
       *
       *
+      * 多部分媒体类型是复合类型。多部分对象包含多个组件类型。下面是一个多部分 / 混合内容实例，每个组件都有自己的 MIME 类型
+      *
       *生成的boundary（边界）用来分块不同的内容  每一部分的数据均以这个开始，然后是*内容描述* ，然后是回车，最后
       * 是字段的内容（文本或者二进制）。如果传输的是文件，还要标注文件名称和文件类型信息。消息主题最后以boundary结束。
       *
@@ -108,6 +110,20 @@ public class Demo {
 
      /**
       * drawing
+      */
+
+
+     //报文
+
+     /**
+      * 请求报文和相应报文只是起始行不一致
+      *
+      * 请求报文                                相应报文
+      * 起始行  GET www.baidu.com HTTP/1.1      HTTP/1.1 200 OK
+      * header Accept:text/*                   Content-Type:application/json
+      *
+      * body(GET没有)                          Hi! msg.....
+      *
       */
 
      public static void postJson(){
