@@ -1,4 +1,4 @@
-``` java
+``` dart
 
 Dio dio = new Dio(); // with default Options
 
