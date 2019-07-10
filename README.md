@@ -1,3 +1,5 @@
+``` java
+
 Dio dio = new Dio(); // with default Options
 
 // Set default configs
@@ -12,3 +14,6 @@ BaseOptions options = new BaseOptions(
     receiveTimeout: 3000,
 );
 Dio dio = new Dio(options);
+
+
+```
